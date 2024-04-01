@@ -1,0 +1,12 @@
+{
+  "name": "drop-down-system",
+  "version": "1.0.0",
+  "description": "A system to reveal/hide components of a drop-down menu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Shamblonaut <shaheembn@gmail.com> [https://github.com/shamblonaut]",
+  "license": "ISC"
+}
