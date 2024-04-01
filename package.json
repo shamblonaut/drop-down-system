@@ -1,6 +1,6 @@
 {
   "name": "drop-down-system",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A system to reveal/hide components of a drop-down menu",
   "main": "index.js",
   "repository": {

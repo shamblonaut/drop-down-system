@@ -1,17 +1,32 @@
-export function setupDropDownSystem(parentElement, visibilityClass) {
-  Array.from(parentElement.children).forEach(child => {
-    child.children[0].addEventListener("click", () => {
-      Array.from(parentElement.children).forEach(otherChild => {
-        if (child !== otherChild) otherChild.children[1].classList.remove(visibilityClass);
+export function setupDropDownSystem(activators, dropDownClass, visibilityClass) {
+  if (activators.length < 0) return; 
+
+  activators.forEach(activator => {
+    activator.addEventListener("click", event => event.stopPropagation());
+
+    const activatorButton = activator.querySelector("button");
+    if (activatorButton === null) throw new Error("Activator button not found");
+
+    const dropDown = activator.querySelector(`.${dropDownClass}`);
+    if (dropDown === null) throw new Error("Drop down not found");
+
+    activatorButton.addEventListener("click", () => {
+      activators.forEach(otherActivator => {
+        const otherDropDown = otherActivator.querySelector(`.${dropDownClass}`);
+        if (otherDropDown === null) throw new Error("Drop down not found");
+
+        if (activator !== otherActivator) otherDropDown.classList.remove(visibilityClass);
       });
-      child.children[1].classList.toggle(visibilityClass);
+      dropDown.classList.toggle(visibilityClass);
     });
   });
   
-  parentElement.addEventListener("click", event => event.stopPropagation());
   window.addEventListener("click", () => {
-    Array.from(parentElement.children).forEach(child => {
-      child.children[1].classList.remove(visibilityClass);
+    activators.forEach(activator => {
+      const dropDown = activator.querySelector(`.${dropDownClass}`);
+      if (dropDown === null) throw new Error("Drop down not found");
+
+      dropDown.classList.remove(visibilityClass);
     });
   });
 }
